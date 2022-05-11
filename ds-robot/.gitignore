@@ -1,0 +1,19 @@
+build/
+dbs/
+eggs/
+logs/
+project.egg-info/
+twistd.pid
+
+**__pycache__
+
+**/.env
+
+venv/
+
+.vscode/
+
+# 配置文件
+./scrapy.cfg
+
+.DS_Store

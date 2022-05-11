@@ -1,0 +1,65 @@
+version: '3.1'
+services:
+  mongodb:
+    image: mongo:5.0.8
+    restart: always
+    privileged: true
+    ports:
+      - ${MONGO_PORT}:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+    volumes:
+      - ./mongodb:/data/db
+  robot:
+    build:
+      context: ./ds-robot/
+      args:
+        - PYPI_MIRROR=${PYPI_MIRROR}
+    restart: always
+    tty: true
+    privileged: true
+    links:
+      - mongodb
+    depends_on:
+      - mongodb
+    volumes:
+      - ./ds-robot:/root/ds-robot
+      - ./logs/ds-robot/:/root/ds-robot/logs
+      - ./public:/root/public
+    ports:
+      - ${SCRAPYD_PORT}:6800
+  server:
+    build:
+      context: ./ds-server/
+      args:
+        - PYPI_MIRROR=${PYPI_MIRROR}
+    privileged: true
+    restart: always
+    tty: true
+    links:
+      - robot
+    depends_on:
+      - robot
+    volumes:
+      - ./ds-server:/root/ds-server
+      - ./logs/ds-server/uwsgi:/var/log/uwsgi
+      - ./public:/root/public
+    ports:
+      - ${HTTP_PORT}:8000
+      - ${SOCKET_PORT}:8080
+  admin:
+    build:
+      context: ./ds-admin/
+      args:
+        - NPM_MIRROR=${NPM_MIRROR}
+    restart: always
+    tty: true
+    links:
+      - robot
+      - server
+    depends_on:
+      - robot
+      - server
+    ports:
+      - ${NEXT_PORT}:3000

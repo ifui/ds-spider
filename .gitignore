@@ -1,0 +1,35 @@
+*pyc
+venv/
+
+public/
+volumes/*
+logs/
+
+**/*.pid
+**/db*
+
+# ide
+.vscode/
+.idea/
+**/.idea/
+
+mongodb/
+
+.DS_Store
+
+# ds-admin
+ds-admin/.next/
+ds-admin/out/
+ds-admin/node_modules
+ds-admin/coverage
+
+# ds-robot
+ds-robot/dbs
+ds-robot/logs
+ds-robot/scrapy.cfg
+ds-robot/robot/.env
+ds-robot/setup.py
+
+# ds-server
+ds-server/.env
+

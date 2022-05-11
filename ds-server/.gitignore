@@ -1,0 +1,31 @@
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Python cache
+venv/
+**/__pycache__
+
+# Edit files
+.vscode/
+.DS_Store
+
+# Database
+database.cnf
+
+# Env
+*.env
+
+# DB
+db.*
+
+# Tmp
+tmp/
+
+# pid
+
+**/*.pid

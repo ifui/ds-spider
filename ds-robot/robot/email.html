@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title></title>
+
+  <style type="text/css">
+  </style>
+</head>
+
+<body style="margin:0; padding:0; background-color: #f9f9fc;">
+  <center>
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#f9f9fc">
+      <tr>
+        <td colspan="3" style="height: 50px;"></td>
+      </tr>
+      <tr>
+        <td width="10%"></td>
+        <td align="center">
+          <div style="min-width: 320px;max-width: 660px;">
+            <table
+              style="width:100%; border-collapse:collapse; box-shadow: 0px 0px 13px 0px rgba(82, 63, 105, 0.05);background: #ffffff;border-radius: 5px;color: #6c7293;font-family: '微软雅黑',Microsoft YaHei">
+              <tbody>
+                <tr>
+                  <td style="padding:35px 0 20px 0;text-align: center;font-weight: bold;font-size: 20px;" colspan="3">
+                    采集报告
+                  </td>
+                </tr>
+                <tr>
+                  <td style="width: 22px">
+                  </td>
+                  <td>
+                    <table
+                      style="width: 100%;border-collapse:collapse;color: #6c7293;font-family: '微软雅黑',Microsoft YaHei">
+                      <tbody>
+                        <tr>
+                          <td style="font-size: 18px;">
+                            尊敬的管理员，
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="padding: 10px;font-size: 14px;">
+                            您好！您的项目：“{{ data.spider.title }}”已采集完成，详细信息如下：
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="padding: 10px;">
+                            <table style="width: 100%;border-collapse:collapse;font-family: '微软雅黑',Microsoft YaHei">
+                              <tbody>
+                                <tr>
+                                  <td style="width: 3.2%;"></td>
+                                  <td>
+                                    <table
+                                      style="width: 100%;border-collapse:collapse;font-family: '微软雅黑',Microsoft YaHei;color: #6c7293;">
+                                      <tbody>
+                                        <tr>
+                                          <td
+                                            style="padding: 8px 0;font-size: 16px;border-bottom: 1px dashed #ebedf2;color: #6c7293">
+                                            项目名称：
+                                            <span style="color: #6c7293">{{ data.spider.title }}</span>
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td
+                                            style="padding: 8px 0;font-size: 16px;border-bottom: 1px dashed #ebedf2;color: #6c7293">
+                                            项目别名：
+                                            <span style="color: #6c7293">{{ data.spider.name }}</span>
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td
+                                            style="padding: 8px 0;font-size: 16px;border-bottom: 1px dashed #ebedf2;color: #6c7293">
+                                            采集状态：
+                                            {% if data.stats.get_value('log_count/ERROR') %}
+                                            <span style="color: red">异常</span>
+                                            {% else %}
+                                            <span style="color: green">正常</span>
+                                            {% endif %}
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td
+                                            style="padding: 8px 0;font-size: 16px;border-bottom: 1px dashed #ebedf2;color: #6c7293">
+                                            采集用时：
+                                            <span>
+                                              {{ data.stats.get_value('elapsed_time_seconds') or 0 }}
+                                              秒
+                                            </span>
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td
+                                            style="padding: 8px 0;font-size: 16px;border-bottom: 1px dashed #ebedf2;color: #6c7293">
+                                            时间范围：
+                                            <span>
+                                              {% if data.spider.start_time == data.spider.end_time %}
+                                              {{ data.spider.start_time.strftime('%Y年%m月%d日') }}
+                                              {% else %}
+                                              {{ data.spider.start_time.strftime('%Y年%m月%d日') }}
+                                              至
+                                              {{ data.spider.end_time.strftime('%Y年%m月%d日') }}
+                                              {% endif %}
+                                            </span>
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td
+                                            style="padding: 8px 0;font-size: 16px;border-bottom: 1px dashed #ebedf2;color: #6c7293">
+                                            信息数量：
+                                            <span>
+                                              {{ data.stats.get_value('item_scraped_count') or 0 }}
+                                              条
+                                            </span>
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td
+                                            style="padding: 8px 0;font-size: 16px;border-bottom: 1px dashed #ebedf2;color: #6c7293">
+                                            附件数量：
+                                            <span>
+                                              {{ data.stats.get_value('file_count') or 0 }}
+                                              个
+                                            </span>
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </td>
+                                  <td style="width: 3.2%;"></td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                  <td style="width: 22px"></td>
+                </tr>
+                <tr>
+                  <td style="text-align: center; color: #a7abc3;font-size: 12px; padding: 10px 0 25px 0;" colspan="3">
+                    此为系统邮件，请勿回复。</td>
+                </tr>
+                <tr>
+                  <td
+                    style="background: #1e1e2d;color: #a9a7bc;padding: 18px 0;border-radius: 0 0 5px 5px;font-size: 12px;text-align: center;"
+                    colspan="3">© ifui@foxmail.com</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </td>
+        <td width="10%"></td>
+      </tr>
+    </table>
+  </center>
+</body>
+
+</html>
